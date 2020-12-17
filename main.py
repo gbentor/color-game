@@ -10,11 +10,12 @@ open_message = f"{len(COLORS)} colors are available: {[get_full_color_name(x) fo
                f"and to all tiles that are the same color as the corner tile, and which are directly connected to it " \
                f"(diagonal doesn't count).\nThe goal of the game is to color the entire board with a single color."
 
-print(open_message)
 board = Board(BOARD_SIZE)
-board.print_board()
 all_board = [copy.deepcopy(board)]
 while board.get_steps() < ALLOWED_STEPS:
+    os.system('cls' if os.name == 'nt' else 'clear')
+    print(open_message)
+    board.print_board()
     in_color = input(f"\nYou have {ALLOWED_STEPS-board.get_steps()} steps left!\nEnter desired color: ")
     if in_color not in COLORS:
         print(f"Invalid input!! Should be in {COLORS}")
@@ -24,12 +25,15 @@ while board.get_steps() < ALLOWED_STEPS:
     board.print_board()
     board.increment_steps()
     all_board.append(copy.deepcopy(board))
+
     if not board.is_ongoing():
         for board_copy in all_board:
-            os.system('clear')
+            os.system('cls' if os.name == 'nt' else 'clear')
             print("Congratulations! You have won the game!!!")
             board_copy.print_board()
             time.sleep(0.5)
         break
 else:
+    os.system('cls' if os.name == 'nt' else 'clear')
+    board.print_board()
     print(f"Oh no! You didn't finish the game in {ALLOWED_STEPS} steps... You lose!")
