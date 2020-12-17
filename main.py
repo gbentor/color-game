@@ -1,4 +1,4 @@
-from Board import Board, COLORS
+from Board import Board, COLORS, get_full_color_name
 import copy
 import os
 import time
@@ -6,6 +6,11 @@ import time
 BOARD_SIZE = 18
 ALLOWED_STEPS = 21
 
+open_message = f"{len(COLORS)} colors are available: {[get_full_color_name(x) for x in COLORS]}.\nEach time you select a color it will be applied to the leftmost upper corner of the board,\n" \
+               f"and to all tiles that are the same color as the corner tile, and which are directly connected to it " \
+               f"(diagonal doesn't count).\nThe goal of the game is to color the entire board with a single color."
+
+print(open_message)
 board = Board(BOARD_SIZE)
 board.print_board()
 all_board = [copy.deepcopy(board)]
@@ -21,10 +26,10 @@ while board.get_steps() < ALLOWED_STEPS:
     all_board.append(copy.deepcopy(board))
     if not board.is_ongoing():
         for board_copy in all_board:
+            os.system('clear')
             print("Congratulations! You have won the game!!!")
             board_copy.print_board()
             time.sleep(0.5)
-            os.system('clear')
         break
 else:
     print(f"Oh no! You didn't finish the game in {ALLOWED_STEPS} steps... You lose!")
