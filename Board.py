@@ -1,7 +1,7 @@
 from random import randint
 from termcolor import colored
 
-COLORS = ['r', 'y', 'g', 'b', 'm']  # list of used colors
+COLORS = ['r', 'y', 'g', 'b']  # list of used colors
 
 
 # convert color initial to full name
