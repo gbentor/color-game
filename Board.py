@@ -1,7 +1,7 @@
 from random import randint
 from termcolor import colored
 
-COLORS = ['r', 'y', 'g', 'b']  # list of used colors
+COLORS = ['r', 'y', 'g', 'b', 'm']  # list of used colors
 
 
 # convert color initial to full name
@@ -14,6 +14,8 @@ def get_full_color_name(initial: str) -> str:
         return "green"
     elif initial == 'b':
         return "blue"
+    elif initial == 'm':
+        return "magenta"
     else:
         raise Exception("Unknown color!")
 
@@ -79,7 +81,7 @@ class Board:
     # apply new color to tile, and continue recursion
     def __apply_color(self, new_color: str, orig_color: str, row_idx: int, col_idx: int):
         # first we check that tile is within the board. if it is - if original color is same as tile color, paint it with
-        # tile color. otherwise, return.
+        # new color. otherwise, return.
         if row_idx < 0 or col_idx < 0 or row_idx >= self.__board_size or col_idx >= self.__board_size or \
                 self.__board[row_idx][col_idx].color != orig_color or self.__board[row_idx][col_idx].color == new_color:
             return
